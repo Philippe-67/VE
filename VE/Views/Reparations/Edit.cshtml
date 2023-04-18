@@ -1,0 +1,44 @@
+﻿@model VE.Models.Reparations
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Reparations</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ReparationId" />
+            <div class="form-group">
+                <label asp-for="DatePriseEnCharge" class="control-label"></label>
+                <input asp-for="DatePriseEnCharge" class="form-control" />
+                <span asp-validation-for="DatePriseEnCharge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateDelivrance" class="control-label"></label>
+                <input asp-for="DateDelivrance" class="form-control" />
+                <span asp-validation-for="DateDelivrance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VoituresId" class="control-label"></label>
+                <select asp-for="VoituresId" class="form-control" asp-items="ViewBag.VoituresId"></select>
+                <span asp-validation-for="VoituresId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

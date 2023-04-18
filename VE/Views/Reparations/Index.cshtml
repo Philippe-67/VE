@@ -1,0 +1,47 @@
+﻿@model IEnumerable<VE.Models.Reparations>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePriseEnCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateDelivrance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voiture)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePriseEnCharge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDelivrance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Voiture.VoituresId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReparationId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReparationId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReparationId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
