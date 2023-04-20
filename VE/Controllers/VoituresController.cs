@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VE.Data;
 using VE.Models;
@@ -22,9 +17,17 @@ namespace VE.Controllers
         // GET: Voitures
         public async Task<IActionResult> Index()
         {
-              return _context.Voitures != null ? 
-                          View(await _context.Voitures.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Voitures'  is null.");
+            return _context.Voitures != null ?
+                        View(await _context.Voitures
+                        .Include(r => r.Reparations).ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Voitures'  is null.");
+            //var voituresAvecReparations = _context.Voitures.Include(v => v.Reparations).ToList();
+
+            //// Trouver toutes les interventions pour une réparation donnée
+            //var interventionsPourReparation = _context.Reparations
+            //    .Include(r => r.ReparationInterventions)
+            //    .ThenInclude(ri => ri.Intervention)
+            //    .FirstOrDefault(r => r.ReparationId == votreReparationId)?.ReparationInterventions.Select(ri => ri.Intervention).ToList();
         }
 
         // GET: Voitures/Details/5
@@ -150,14 +153,21 @@ namespace VE.Controllers
             {
                 _context.Voitures.Remove(voitures);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        //
+        // using (var _context = new VotreContexte())
+
+        // Trouver toutes les voitures avec leurs réparations
+
+
 
         private bool VoituresExists(int id)
         {
-          return (_context.Voitures?.Any(e => e.VoituresId == id)).GetValueOrDefault();
-        }
+            return (_context.Voitures?.Any(e => e.VoituresId == id)).GetValueOrDefault();
+        } 
     }
 }
+

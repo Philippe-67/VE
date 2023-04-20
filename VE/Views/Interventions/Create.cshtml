@@ -1,6 +1,6 @@
 ﻿@model VE.Models.Interventions
 
-@{
+@*@{
     ViewData["Title"] = "Create";
 }
 
@@ -13,9 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="TypeIntervention" class="control-label"></label>
-                <input asp-for="TypeIntervention" class="form-control" />
-                <span asp-validation-for="TypeIntervention" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -31,3 +31,21 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+*@@{
+    ViewData["Title"] = "Sélectionner un type d'intervention";
+}
+
+<h1>Sélectionner un type d'intervention</h1>
+
+<form asp-action="HandleInterventionType">
+    <div class="form-group">
+        <label for="interventionType">Type d'intervention :</label>
+        <select class="form-control" id="interventionType" name="interventionType">
+            @foreach (var interventionType in ViewBag.InterventionTypes)
+            {
+                <option value="@interventionType.Name">@interventionType.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>

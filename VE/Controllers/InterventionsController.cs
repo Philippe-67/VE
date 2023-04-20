@@ -48,7 +48,20 @@ namespace VE.Controllers
         // GET: Interventions/Create
         public IActionResult Create()
         {
-            return View();
+          
+            {
+                var interventionTypes = new List<Interventions>
+            {
+                new Interventions { Name = "Frein" },
+                new Interventions { Name = "Batterie" },
+                new Interventions { Name = "Carrosserie" }
+            };
+
+                ViewBag.InterventionTypes = interventionTypes;
+
+                return View();
+            }
+            // return View();
         }
 
         // POST: Interventions/Create

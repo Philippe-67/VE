@@ -6,6 +6,8 @@ namespace VE.Models
     {
         [Key]
         public int Id { get; set; }
+        public Reparations Reparation { get; set; }
         public string? TypeIntervention { get; set; }
+        public Interventions Intervention { get; set; }
     }
 }
